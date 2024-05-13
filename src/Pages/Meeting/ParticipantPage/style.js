@@ -78,6 +78,7 @@ const useStyles = createStyles((theme) => ({
     height: '100%',
     justifyContent: 'center',
     backgroundColor: '#000',
+    alignItems: 'center',
     'h1': {
       color: theme.colors.primary[0],
       position: 'absolute',
@@ -88,7 +89,13 @@ const useStyles = createStyles((theme) => ({
       marginLeft: 5,
       padding: 5,
       fontSize: 18,
+      [theme.fn.smallerThan(567)]: {
+        right: 0,
+        top:0,
+        display: 'inline-table',
+      },
     },
+    
   },
   hostDetailsWrapper: {
     display: 'flex',
@@ -145,7 +152,18 @@ const useStyles = createStyles((theme) => ({
     background: 'grey',
   },
   hostCamera: {
-    border: '2px dashed white'
+    border: '2px dashed white',
+    'h1': {
+      color: theme.colors.primary[0],
+      position: 'absolute',
+      bottom: 0,
+      right: 10,
+      background: 'white',
+      borderRadius: 30,
+      marginLeft: 5,
+      padding: 5,
+      fontSize: 18,
+    },
   }
 }));
 export default useStyles;

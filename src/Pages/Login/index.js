@@ -39,8 +39,9 @@ function Login() {
                 headers: getHeader(),
                 body: JSON.stringify(form.values),
             });
+            var result = await response.json();
             if (response.ok) {
-                var result = await response.json();
+              
                 let data = {
                     email: result.email,
                     name: result.name,
@@ -52,7 +53,7 @@ function Login() {
                     ShowNotification('success', result.msg, '');
                 }
                 else ShowNotification('failure', result.msg, '');
-            } else ShowNotification('failure', 'Some Error Occured', '')
+            } else ShowNotification('failure', result.msg, '')
         }
         catch (error) {
             ShowNotification('failure', error.message, '')

@@ -9,11 +9,13 @@ import micOff from '../../../assets/images/micOff.png'
 import micOn from '../../../assets/images/micOn.png'
 import endCall from '../../../assets/images/endCall.png'
 import malePersonAvatar from '../../../assets/images/malePersonAvatar.svg'
+import hostPersonAvatar from '../../../assets/images/hostPersonAvatar.jpg'
+import timerEndMP3 from '../../../assets/audio/timer-end.mp3'
 import { WebsocketContext } from '../index.js';
 import { Carousel } from '@mantine/carousel';
 import ShowNotification from '../../../Utils/notification.js';
 import raiseHand from '../../../assets/images/raiseHand.png'
-function ParticipantPage({ meetingId }) {
+function ParticipantPage({ meetingId, participantName }) {
 
     const { classes } = useStyles(useStyles);
     const [ready, wsResponse, send] = useContext(WebsocketContext);
@@ -25,6 +27,13 @@ function ParticipantPage({ meetingId }) {
     const [hostVideo, setHostVideo] = useState(false);
     const [participantId, setParticipantId] = useState();
     const [participantList, setParticipantList] = useState([]);
+    const playTimerEndAudio = () =>{
+        var audio = new Audio(timerEndMP3);
+        if(audio){
+            console.log('going to play audio');
+            audio.play();
+        }
+    }
     useEffect(() => {
 
         console.log('is connection established', ready);
@@ -52,8 +61,13 @@ function ParticipantPage({ meetingId }) {
         if (responseData.msg) {
             ShowNotification('success', responseData.msg, '');
         }
-        if ('timeLeft' in responseData)
+        if ('timeLeft' in responseData){
             setTimeLeft(responseData.timeLeft);
+            // if time left is 0, play sound
+            if(responseData.timeLeft == 0) playTimerEndAudio();
+
+        }
+           
     }, [wsResponse]);
     const handleRaiseHand = () => {
         const data = {
@@ -100,7 +114,7 @@ function ParticipantPage({ meetingId }) {
             {/* Host Camera for participant */}
             <Box className={classes.hostWrapper}>
                 <Box className={classes.hostDetails}>
-                    <img src={malePersonAvatar} width="150px"></img>
+                    <img src={hostPersonAvatar} width="150px" height="150px"></img>
                     <h1> {hostName} </h1>
                 </Box>
             </Box>
@@ -117,6 +131,8 @@ function ParticipantPage({ meetingId }) {
                 {/* Host Camera */}
                 <Grid.Col span={7} sm={2} className={classes.hostCamera}>
                     <img src={malePersonAvatar} width="100%"></img>
+                    <h1> {participantName} </h1>
+                    
                 </Grid.Col>
             </Grid>
         </Box >

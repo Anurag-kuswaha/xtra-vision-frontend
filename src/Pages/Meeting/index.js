@@ -39,7 +39,7 @@ function Meeting() {
             {
                 userType === 'Participant' && participantName == '' ? <NameModal participantName={participantName} setParticipantName={setParticipantName} /> :
                     <WebsocketContext.Provider value={ret}>
-                        {userType === 'Host' ? <HostPage meetingId={meetingId} /> : <ParticipantPage meetingId={meetingId}></ParticipantPage>}
+                        {userType === 'Host' ? <HostPage meetingId={meetingId} /> : <ParticipantPage meetingId={meetingId} participantName={participantName}></ParticipantPage>}
                     </WebsocketContext.Provider>
             }
         </>

@@ -9,6 +9,7 @@ import micOff from '../../../assets/images/micOff.png'
 import micOn from '../../../assets/images/micOn.png'
 import endCall from '../../../assets/images/endCall.png'
 import malePersonAvatar from '../../../assets/images/malePersonAvatar.svg'
+import hostPersonAvatar from '../../../assets/images/hostPersonAvatar.jpg'
 import { WebsocketContext } from '../index.js';
 import ShareLinkModal from '../../../Components/ShareLinkModal';
 import ShowNotification from '../../../Utils/notification.js';
@@ -59,7 +60,7 @@ function HostPage({ meetingId }) {
         }
         // update the new list of participant
         if (responseData.participant) {
-            let newList = responseData.participant.map((listData) => { return { name: listData.name, id: listData.id } })
+            let newList = responseData.participant.filter((listData) => listData && listData.name)
             setParticipantList(newList);
         }
         if (responseData.msg) {
@@ -140,7 +141,7 @@ function HostPage({ meetingId }) {
                 </Grid.Col>
                 {/* Host Camera */}
                 <Grid.Col span={4} sm={2} className={classes.hostCamera}>
-                    <img src={malePersonAvatar} width="100%"></img>
+                    <img src={hostPersonAvatar} width="100%"></img>
                 </Grid.Col>
             </Grid>
             {/* Shareable link to share meeting invite */}
