@@ -20,7 +20,7 @@ function Login() {
     const[loadMetingList, setLoadMeetingList] = useState('');
     const navigate = useNavigate();
     const createMeeting = async (meetingType) => {
-        // meeting type can be INSTANT or SCHEDULDED , do API call to create the meeting
+       // meeting type can be INSTANT or SCHEDULDED , do API call to create the meeting
 
         let body = {
             type: meetingType,

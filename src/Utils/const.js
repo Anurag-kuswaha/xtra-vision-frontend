@@ -1,6 +1,6 @@
 const sessionKey = 'xtra-token';
-export const baseURL = 'http://localhost:3001';
-export const baseURLSocket = 'ws://localhost:3001/websocket';
+export const baseURL = process.env.REACT_APP_BACKEND_URL ? process.env.REACT_APP_BACKEND_URL : 'http://localhost:3001' ;
+export const baseURLSocket = process.env.REACT_APP_BACKEND_WEBSOCKET_URL ? process.env.REACT_APP_BACKEND_WEBSOCKET_URL : 'ws://localhost:3001/websocket' ;
  const getUserEmail = () => {
   let userData = JSON.parse(localStorage.getItem(sessionKey))
   return userData ? userData.email: null;
