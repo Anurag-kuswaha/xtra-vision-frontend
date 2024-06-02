@@ -21,6 +21,11 @@ function Login() {
     const navigate = useNavigate();
     const createMeeting = async (meetingType) => {
        // meeting type can be INSTANT or SCHEDULDED , do API call to create the meeting
+       if(!userDetails){
+        setTimeout(function () { navigate(`/signup`) }, 2000);
+        ShowNotification('failure', 'Plese create an account or login to start meeting', '')
+        return 
+       }
 
         let body = {
             type: meetingType,

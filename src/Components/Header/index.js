@@ -3,7 +3,7 @@ import { useStyles } from './style';
 import { NavLink, useNavigate, Link } from 'react-router-dom';
 import { properties } from './properties';
 import { Outlet } from "react-router-dom";
-import logoUrl from '../../assets/images/companyLogo.svg'
+import logoUrl from '../../assets/images/companyLogo.png'
 import { handleLogOut } from '../../Utils/const';
 const Header = ({ }) => {
     const { classes } = useStyles(useStyles);
